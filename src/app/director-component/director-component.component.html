@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Director: {{data.name}}</mat-card-title>
+    <mat-card-subtitle>Born: {{data.birth}}</mat-card-subtitle>
+    <mat-card-subtitle>Died: {{data?.death}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Bio: {{data.bio}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      (click)="closeDialog()"
+      color="primary"
+    >
+      Close
+    </button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,31 @@
+<div class="navbar">
+  <div class="navbar-logo">
+    <h1>myFlix</h1>
+  </div>
+  <div class="navbar-navigation">
+    <button 
+      mat-raised-button
+      class="btn" 
+      routerLink="/users"
+    >
+      Profile
+    </button>
+    <button 
+      mat-raised-button
+      class="btn" 
+      routerLink="/movies"
+    >
+      Movies
+    </button>
+    <button 
+      mat-raised-button
+      class="btn" 
+      (click)="signOut()"
+    >
+      Sign Out
+    </button>
+  </div>
+</div>
+
+
+

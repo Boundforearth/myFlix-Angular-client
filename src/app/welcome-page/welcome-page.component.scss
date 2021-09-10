@@ -1,0 +1,30 @@
+.main-page {
+  display: flex;
+  justify-content: center;
+  padding-top: 10rem;
+  background-color: #0a122f;
+  color: #e1c6ff;
+  width: 100%;
+  height: 100%
+}
+
+.welcome {
+  font-size: 2rem;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 1rem;
+}
+
+.btn {
+  background-color: #3f51b5;
+  margin-right: 10px;
+  color: #e1c6ff;
+}
+
+.btn:hover {
+  color: #3f51b5;
+  background-color: #e1c6ff;
+}

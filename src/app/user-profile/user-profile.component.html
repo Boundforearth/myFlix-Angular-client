@@ -1,0 +1,27 @@
+<app-navbar></app-navbar>
+<div class="user-info">
+  <h2>{{user.name}}'s Profile</h2>
+  <div>
+    <p>Username: {{user.name}}</p>
+    <p>Email: {{user.email}}</p>
+    <p>Date of Birth: {{user.birth}}</p>
+    <button 
+      mat-raised-button
+      class="btn"
+      (click)="openDeleteUser()"
+    >
+      Delete Profile
+    </button>
+    <button
+      mat-raised-button
+      class="btn"
+      (click)="openEditUser()"
+    >
+      Edit Profile
+    </button>
+  </div>
+  <div>
+    <h2>{{user.name}}'s Favorites</h2>
+    <app-favorites></app-favorites>
+  </div>
+</div>

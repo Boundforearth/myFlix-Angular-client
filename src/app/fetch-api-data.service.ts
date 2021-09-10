@@ -108,7 +108,7 @@ export class FetchDataApiService {
     const user = localStorage.getItem("user");
     return this.http.put(apiUrl + `users/${user}`, userDetails, {headers: new HttpHeaders({
       Authorization: `Bearer ${token}`
-    })}).pipe(
+    }), responseType: "text"}).pipe(
       catchError(this.handleError)
     )
   }
@@ -117,8 +117,9 @@ export class FetchDataApiService {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
     return this.http.delete(apiUrl + `users/${user}`, {headers: new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    })}).pipe(
+      Authorization: `Bearer ${token}`,
+    }), responseType: "text"})
+    .pipe(
       catchError(this.handleError)
     )
   }
@@ -128,13 +129,16 @@ export class FetchDataApiService {
     const user = localStorage.getItem("user");
     return this.http.delete(apiUrl + `usres/${user}/mylist/${movieId}`, {headers: new HttpHeaders({
       Authorization: `Bearer ${token}`
-    })}).pipe(
+    }),
+    responseType: "text"})
+    .pipe(
       catchError(this.handleError)
     )
 
   }
 
   private handleError(error: HttpErrorResponse): any {
+    console.log(error)
     if (error.error instanceof ErrorEvent) {
       console.error("Some error occurred:", error.error.message);
     } else {
@@ -150,6 +154,7 @@ export class FetchDataApiService {
 
 // Non-typed response extraction
   private extractResponseData(res: Response | Object): any {
+    console.log(res)
     const body = res;
     return body || { };
   }

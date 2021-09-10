@@ -1,0 +1,22 @@
+.movies {
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(20rem, 1fr) );
+  background-color: #0a122f;
+  color: #e1c6ff;
+  text-align: center;
+  justify-items: center;
+}
+
+.movie-card {
+  max-width: 18rem;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.movie-title {
+  display: block;
+}
+
+img {
+  max-width: 15rem;
+}

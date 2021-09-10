@@ -3,7 +3,7 @@
     <mat-card-title>Sign Up!</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form> 
+    <form>
       <mat-form-field>
         <input 
           matInput
@@ -49,10 +49,18 @@
   <mat-card-actions>
     <button
       mat-raised-button
-      (click)="registerUser()"
+      (click)="editUser()"
       color="primary"
     >
-      Sign Up
+     Update Profile
+    </button>
+    <button
+      mat-raised-button
+      (click)="cancel()"
+      color="primary"
+    >
+     Cancel
     </button>
   </mat-card-actions>
 </mat-card>
+
