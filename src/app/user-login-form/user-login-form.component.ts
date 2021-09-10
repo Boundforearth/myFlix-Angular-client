@@ -14,6 +14,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 export class UserLoginFormComponent implements OnInit {
 
 
+  //Inputs are double bound to the inputs on the user-login html file
   @Input() userData = { Username: "", Password: ""}
 
   constructor(
@@ -22,12 +23,14 @@ export class UserLoginFormComponent implements OnInit {
     public snackBar: MatSnackBar,
     public router: Router,
   ) { }
-
+ 
   ngOnInit(): void {
   }
 
   userLogin(): void {
+    //take the input login data and make a request
     this.fetchDataApi.userLogin(this.userData).subscribe((results) => {
+      // close the dialog upon success, set the token and username to local storage, 
       this.dialogRef.close();
       console.log(results);
       localStorage.setItem("user", results.user.Username)
@@ -35,6 +38,7 @@ export class UserLoginFormComponent implements OnInit {
       this.snackBar.open("Successfully Logged In!", "OK", {
         duration: 2000
       })
+      //navigate to the movies route
        this.router.navigate(["movies"]);
     }, (results) => {
       this.snackBar.open(results, "OK", {

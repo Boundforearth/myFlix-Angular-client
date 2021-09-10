@@ -10,8 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./delete-user.component.scss']
 })
 export class DeleteUserComponent implements OnInit {
-
+ 
   constructor(
+    //allows use of http requests, router, dialog
     public dialogRef: MatDialogRef<DeleteUserComponent>,
     public fetchDataApi: FetchDataApiService,
     public snackBar: MatSnackBar,
@@ -21,19 +22,24 @@ export class DeleteUserComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //if user chooses to not delete their account, close the dialog
   dontDelete(): void {
     this.dialogRef.close
   }
 
+  // if user decides to delete account, run this to remove account from database
   deleteUser(): void {
     this.fetchDataApi.deleteUser().subscribe(() => {
+      //upon success, this code runs to navigate to welcome screen and close the dialog
       this.dialogRef.close()
       localStorage.clear();
       this.router.navigate(["welcome"]);
       this.snackBar.open("Sorry to see you go :(", "OK", {
         duration: 2000
       })
-    }, (result) => {
+    }, 
+      //this code runs upon error, but http request may still succeed.
+      (result) => {
         this.snackBar.open(result, "OK", {
           duration: 2000
         })

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FetchDataApiService } from '../fetch-api-data.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+ 
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class EditUserComponent implements OnInit {
 
+  //Input is double bound to the inputs in the edit-user HTML page
   @Input() userData = { Username: "", Password: "", Email: "", Birthday: ""}
 
   constructor(
@@ -22,15 +23,19 @@ export class EditUserComponent implements OnInit {
   }
 
   editUser(): void {
+    //updates the user information in the database
     this.fetchDataApi.editUser(this.userData).subscribe(() => {
       this.dialogRef.close();
       this.snackBar.open("Account Updated!", "OK", {
         duration: 2000
       })
+      //resets the user in local storage
       localStorage.removeItem("user");
       localStorage.setItem("user", this.userData.Username)
+      //refresh page to reflect changes made
       window.location.reload();
     }, (results) => {
+      //something went wrong
       this.snackBar.open(results, "OK", {
         duration: 2000
       })

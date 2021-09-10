@@ -2,7 +2,7 @@
   <mat-card-header>
     <mat-card-title>Director: {{data.name}}</mat-card-title>
     <mat-card-subtitle>Born: {{data.birth}}</mat-card-subtitle>
-    <mat-card-subtitle>Died: {{data?.death}}</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="data.death">Died: {{data.death}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <p>Bio: {{data.bio}}</p>

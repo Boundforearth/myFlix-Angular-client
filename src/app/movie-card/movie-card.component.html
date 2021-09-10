@@ -28,7 +28,27 @@
       >
         Synopsis
       </button>
-      <mat-icon>favorite_border</mat-icon>
+      <ng-container *ngIf="favoritedMovie(movie._id); then favorite; else notFavorite"></ng-container>
+      <ng-template #favorite>
+        <mat-icon 
+          class="favorite-icon"
+          matTooltip="Delete Favorite" 
+          matTooltipPosition="below"
+          (click)="changeFavoriteStatus(movie.Title, movie._id)"
+        >
+          favorite
+        </mat-icon>
+      </ng-template>
+      <ng-template #notFavorite> 
+        <mat-icon 
+          class="favorite-icon"
+          matTooltip="Add Favorite" 
+          matTooltipPosition="below"
+          (click)="changeFavoriteStatus(movie.Title, movie._id)"
+        >
+        favorite_border
+        </mat-icon>
+      </ng-template>
     </mat-card-actions>
   </mat-card>
 </div>

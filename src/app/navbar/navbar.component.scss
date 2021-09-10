@@ -1,11 +1,23 @@
 .navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 9;
   display: flex;
   justify-content: space-between;
   background-color: #0a122f;
   color: #e1c6ff;
   margin: 0;
   padding-left: .5rem;
-  padding-top: .5rem;
+  padding-top: .6rem;
+  border-bottom: .25rem solid #3f51b5;
+}
+
+.navbar-navigation {
+  padding-right: 1rem;
+}
+
+.navbar-logo {
+  cursor: pointer;
 }
 
 .btn {

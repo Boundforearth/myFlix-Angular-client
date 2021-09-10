@@ -4,7 +4,8 @@
   background-color: #0a122f;
   color: #e1c6ff;
   text-align: center;
-  justify-items: center;
+  justify-items: center; 
+  padding-top: 4rem;
 }
 
 .movie-card {
@@ -12,6 +13,11 @@
   padding: 1rem;
   margin: 1rem;
 }
+
+.favorite-icon:hover {
+  cursor: pointer;
+}
+
 
 .movie-title {
   display: block;
