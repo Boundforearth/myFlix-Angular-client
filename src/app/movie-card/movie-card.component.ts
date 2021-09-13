@@ -6,6 +6,7 @@ import { DirectorComponent } from '../director-component/director-component.comp
 import { SynopsisComponent } from '../synopsis-component/synopsis-component.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+
 interface Genre {
   Name: string;
   Description: string;
@@ -39,7 +40,10 @@ export class MovieCardComponent implements OnInit {
     this.getUserFavorites();
   }
 
-  //Get movies from the database
+   /**
+   * Function to get all movies and put save them to an Type Array variable
+   * Movies are all Objects
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -47,7 +51,9 @@ export class MovieCardComponent implements OnInit {
     })
   }
 
-  //get the users favorites from the database.  Onlt contains movie id's
+  /**
+   * Function to get a user Object and save the Favorites to an array
+   */
  getUserFavorites(): void {
     this.fetchApiData.getUser(this.user).subscribe((results) => {
       //set the favorites to the favorites array
@@ -55,7 +61,11 @@ export class MovieCardComponent implements OnInit {
     })
   }
 
-  //return a boolean to determine which icon to use in the HTML.  Pairs with the ng-container and ngIf statements
+  /**
+   * Function to determine which icon to use.  Used with ngIf in movie-card.components.html
+   * @param movieId id comes from movie-card.components.html
+   * @returns {boolean} 
+   */
   favoritedMovie(movieId: any): boolean{
     let favorited: boolean;
     if(this.favorites.includes(movieId)) {
@@ -66,7 +76,11 @@ export class MovieCardComponent implements OnInit {
     return favorited
   }
 
-
+  /**
+  * Function that will add or delete a movie if it is in a users favorites
+  * @param {string} title the movie title provided in movie-card.components.html
+  * @param {string} id the movie id provided in movie-card.components.html
+  */
   changeFavoriteStatus(title: string, id: string): void {
     //variables to determine existance and placement in the array
     let exists: boolean = false;
@@ -111,6 +125,11 @@ export class MovieCardComponent implements OnInit {
     }
   }
 
+   /**
+   * Function to open a dialog displaying Genre information
+   * @param {Object} Genre the movie genre provided in movie-card.components.html
+   * passes data to genre-component.component.ts
+   */
   openGenreDialog(genre: Genre): void {
     this.dialog.open(GenreComponent, {
       width: "500px",
@@ -122,6 +141,11 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * Function to open a dialog displaying Director information
+   * @param {Object}  Director the movie genre provided in movie-card.components.html
+   * passes data to director-component.component.ts
+   */
   openDirectorDialog(director: Director): void {
     this.dialog.open(DirectorComponent, {
       width: "500px",
@@ -135,6 +159,12 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+   /**
+   * Function to open a dialog displyaing a movies synopsis
+   * @param {string} title  Takes the movie title provided in movie-card.components.html
+   * @param {string}  description Takes the description provided in movie-card.components.html
+   * passes data to synopsis-component.component.ts
+   */
   openSynopsisDialog(title: string, description: string): void {
     this.dialog.open(SynopsisComponent, {
       width: "500px",

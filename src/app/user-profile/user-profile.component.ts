@@ -23,7 +23,9 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    //when opened, grab the users information so the name, email, and password can be displayed on the page
+    /**
+     * Gets the user from local storage then runf the get request to get necessary user information
+     */
     this.fetchDataApi.getUser(localStorage.getItem("user")).subscribe((results) => {
       console.log(results);
       // cut off the unneeded part of the birthday
@@ -37,14 +39,18 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-  //opens the editUser dialog
+  /**
+   * Opens dialog used to edit user information
+   */
   openEditUser(): void {
     this.dialog.open(EditUserComponent, {
       width: "500px"
     });
   }
  
-  //open the deleteUser dialog
+  /**
+   * Opens dialog used to delete a user account
+   */
   openDeleteUser(): void {
     this.dialog.open(DeleteUserComponent, {
       width: "500px"

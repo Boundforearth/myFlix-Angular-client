@@ -11,7 +11,9 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class UserRegistrationFormComponent implements OnInit {
 
-  //Input is double bound to the user-registration-form HTML page.
+  /**
+   * Input is double bound to the user-registration-form HTML page.
+   */ 
   @Input() userData = { Username: "", Password: "", Email: "", Birthday: ""};
 
   constructor(
@@ -23,7 +25,9 @@ export class UserRegistrationFormComponent implements OnInit {
   ngOnInit(): void {
   }
  
-  //send form inputs to the backend
+  /**
+   * Creates a user account and saves it to the database
+   */
   registerUser(): void {
     this.fetchApiData.userRegistration(this.userData).subscribe((result) => {
       //logic for successful registration

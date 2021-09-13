@@ -7,6 +7,9 @@ import { map } from "rxjs/operators"
 //Declaring the api url that will provide data for the client app
 const apiUrl = "https://myflix-57495.herokuapp.com/";
 
+/**
+ * userDetails parameters
+ */
 interface userDetails {
   Username: string;
   Password: string;
@@ -14,6 +17,9 @@ interface userDetails {
   Birthday: string;
 }
 
+/**
+ * loginDetails parameters
+ */
 interface loginDetails {
   Username: string;
   Password: string;
@@ -31,8 +37,11 @@ export class FetchDataApiService {
   }
 
 
-  //Making the api call for the user registartion endpoint
-  //Needs Username, Password, Email, and Birthday
+  /** 
+   * Function to register a user 
+   * @param {Object} userDetails  Uses a User Details object, which is full of strings 
+   * returns an error message or the user
+   */
   public userRegistration(userDetails: userDetails): Observable<any> {
     console.log(userDetails);
     return this.http.post(apiUrl + "users", userDetails).pipe(
@@ -40,17 +49,25 @@ export class FetchDataApiService {
     );
   }
 
-  //Make a call to the login endpoint
-  //Needs Username and Password
-  userLogin(userDetails: loginDetails): Observable<any> {
+  /**
+   * 
+   * @param {Object} loginDetails containing Username and Password 
+   * @returns Returns the user and a token
+   */
+  userLogin(loginDetails: loginDetails): Observable<any> {
     const token = localStorage.getItem("token"); 
-    return this.http.post(apiUrl + "login", userDetails).pipe(
+    return this.http.post(apiUrl + "login", loginDetails).pipe(
       catchError(this.handleError)
     )
   }
 
-  //gets all the movies in the database
-  //Each movie has a Title, Director, Genre, _id, Description, Featured, and ImagePath keys
+  /**
+ * Gets an array of movie objects from the database
+ * @method GET
+ * @param {string} - endpoint url/movies
+ * @returns {Array} Returns an array of movie objects.
+ * Each object has _id, Title, Description, Genre, Director, ImagePath, and Featured keys
+ */
   getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token'); 
     return this.http.get(apiUrl + 'movies', {headers: new HttpHeaders(
@@ -63,7 +80,13 @@ export class FetchDataApiService {
   }
 
 
-  //used to grab a single movie from the database
+  /**
+ * Gets s single movie from the database
+ * @method GET
+ * @param {string} - endpoint url/moives/:movie :movie must be provided
+ * @returns {Object} Returns a single movie object with _id, Title, Description, Genre, Director, ImagePath, and Featured keys
+ * displays error message on failure
+ */
   getMovie(): Observable<any> {
     const token = localStorage.getItem("token"); 
     return this.http.get(apiUrl + `movie/:movie`, {headers: new HttpHeaders({
@@ -74,7 +97,11 @@ export class FetchDataApiService {
     )
   }
 
-  //gets a genre from the database with Name and Description as the keys
+  /**
+   * Function to get information on a genre
+   * @param {string} genre Needs the genre name to complete the request
+   * @returns {Object} returns a Genre object with  Name and Description keys
+   */
   getGenre(): Observable<any> {
     const token = localStorage.getItem('token'); 
     return this.http.get(apiUrl + "genres/:genre", {headers: new HttpHeaders({
@@ -85,7 +112,11 @@ export class FetchDataApiService {
     )
   }
 
-  //gets a single driector from the database with Name, Bio, and Birth keys.  Some have a Death key as well
+  /**
+   * Function to get information on a Director
+   * @param {string} director Needs the director name to complete the request
+   * @returns {Object} returns driector from the database with Name, Bio, and Birth keys.  Some have a Death key as well
+   */
   getDirector(): Observable<any> {
     const token = localStorage.getItem("token");
     return this.http.get(apiUrl + "directors/:director", {headers: new HttpHeaders({
@@ -96,7 +127,11 @@ export class FetchDataApiService {
     );
   }
 
-  //Returns a user with Username, Email, Birthday, _id, and Favorites keys
+  /**
+   * Gets a user from the database
+   * @param {string} user takes the provided username 
+   * @returns {Object} Returns an object with Username, Email, _id, Birthday, and Favorites keys
+   */
   getUser(user: string | null): Observable<any> {
     const token = localStorage.getItem("token");
     return this.http.get(apiUrl + `users/${user}`, {headers: new HttpHeaders({
@@ -107,7 +142,10 @@ export class FetchDataApiService {
     )
   }
 
-  //Gets a list of the users favorite movies, which are stored by movieId only.
+  /**
+   * Function that gets a users favorite movies.  User taken from local storage
+   * @returns {Array} returns an array of the users favorite movies by id only
+   */
   getFavorites(): Observable<any> {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
@@ -119,7 +157,12 @@ export class FetchDataApiService {
     );
   }
 
-  //adds a movie to the users favorite.  responseType text is needed to avoid a JSON error
+  /**
+   * Function to add a movie to the users favorites
+   * User is taken from local storage
+   * @param {string} movieId id of movie needed to complete request
+   * @returns {statusMessage} Returns a message about whether or not the movie was added
+   */
   addFavorite(movieId: string): Observable<any> {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
@@ -130,7 +173,11 @@ export class FetchDataApiService {
     )
   }
 
-  //Used to edit the Username, Password, Email, and Birthday of a user.
+  /**
+   * This is a function that allows users to edit their profiles
+   * @param {Object } userDetails Needs the userDetails object defined in the interface
+   * @returns {statusMessage} Sends a message on success or failure
+   */
   editUser(userDetails: userDetails): Observable<any> {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
@@ -141,7 +188,10 @@ export class FetchDataApiService {
     )
   }
 
-  //Deletes a user from the database permanently.  responseType text is needed to avoid a JSON error
+  /**
+   * Function to delete the current user.  User taken from local storage
+   * @returns {statusMessage} Message about success or failure to delete
+   */
   deleteUser(): Observable<any> {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
@@ -153,7 +203,11 @@ export class FetchDataApiService {
     )
   }
 
-  //deletes a movie from a user's favorites.  responseType text is needed to avoid a JSON error
+  /**
+   * Function to delete a movie.  User parameter is taken from local storage
+   * @param {string} movieId 
+   * @returns {statusMessage} Returns a message about success or failure status
+   */
   deleteFavorite(movieId: string): Observable<any> {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
@@ -167,6 +221,11 @@ export class FetchDataApiService {
 
   }
 
+  /**
+   * Function that will handle any errors that pop up
+   * @param error 
+   * @returns {statusMessage} returns message about the error
+   */
   private handleError(error: HttpErrorResponse): any {
     console.log(error)
     if (error.error instanceof ErrorEvent) {

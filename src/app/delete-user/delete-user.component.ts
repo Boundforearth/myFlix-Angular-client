@@ -22,12 +22,16 @@ export class DeleteUserComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  //if user chooses to not delete their account, close the dialog
+  /**
+   * Function to close dialog
+   */
   dontDelete(): void {
     this.dialogRef.close
   }
 
-  // if user decides to delete account, run this to remove account from database
+  /**
+   * Permanently deletes account from the database
+   */
   deleteUser(): void {
     this.fetchDataApi.deleteUser().subscribe(() => {
       //upon success, this code runs to navigate to welcome screen and close the dialog

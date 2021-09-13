@@ -10,8 +10,10 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class DirectorComponent implements OnInit {
 
   constructor(
-    //data from openDirectorDialog() in movie-card.component.ts.
-    //MAT_DIALOG_DATA lets the data flow from that file to here for use
+    /**
+     * data from openDirectorDialog() in movie-card.component.ts.
+     * MAT_DIALOG_DATA lets the data flow from that file to here for use
+     */
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<DirectorComponent>
   ) { }
@@ -19,7 +21,9 @@ export class DirectorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  //code to run when clicking the close button
+  /**
+   *   function to close dialog
+   */
   closeDialog(): void {
     this.dialogRef.close();
   }

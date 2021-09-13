@@ -22,6 +22,9 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Function to sign user out and remove their info from local storage
+   */
   signOut(): void {
     //navigates to the welcome screen upon signing out
     localStorage.clear();

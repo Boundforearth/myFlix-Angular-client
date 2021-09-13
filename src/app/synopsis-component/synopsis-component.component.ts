@@ -10,8 +10,10 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class SynopsisComponent implements OnInit {
 
   constructor(
-    //data from openSynopsisDialog() in movie-card.component.ts.
-    //MAT_DIALOG_DATA lets the data flow from that file to here for use
+    /**
+     * data from openSynopsisDialog() in movie-card.component.ts.
+     * MAT_DIALOG_DATA lets the data flow from that file to here for use
+     */
     public dialogRef: MatDialogRef<SynopsisComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
@@ -19,7 +21,9 @@ export class SynopsisComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // closes dialog upon button click
+  /**
+   * Function to close the dialog
+   */
   closeDialog(): void {
     this.dialogRef.close();
   }

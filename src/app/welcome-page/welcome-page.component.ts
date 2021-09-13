@@ -17,7 +17,9 @@ export class WelcomePageComponent implements OnInit {
   ngOnInit(): void {
   }
  
-  //use to open the registration dialog
+  /**
+   * Opens a dialog that registers users
+   */
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, {
       //Dialog width assignment
@@ -25,7 +27,9 @@ export class WelcomePageComponent implements OnInit {
     });
   }
 
-  //This will open login dialog
+  /**
+   * Opens a dialog allowing users to log in
+   */
   openUserLoginDialog(): void {
     this.dialog.open(UserLoginFormComponent, {
       width: "280px"

@@ -44,7 +44,10 @@ export class FavoritesComponent implements OnInit {
   favoritesArray: any[] = [];
 
 
-  //Get all movies and save them to an array
+  /**
+   * Function to get all movies and put save them to an Type Array variable
+   * Movies are all Objects
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -52,7 +55,9 @@ export class FavoritesComponent implements OnInit {
     })
   }
 
-  //Get all user favorites, id's only, and save them to an array
+  /**
+   * Function to get a user Object and save the Favorites to an array
+   */
  getUserFavorites(): void {
     this.fetchApiData.getUser(this.user).subscribe((results) => {
       this.favorites = results.Favorites;
@@ -62,7 +67,10 @@ export class FavoritesComponent implements OnInit {
   }
   
 
-  //Run through each movie, if the id is in the user's favorites, push the entire movie object into the favoritesArray
+  /**
+   * Funtcion that finds what movies movies are in the User's favorites.  
+   * Grabs the entire movie data and stores it in a new array
+   */
  favoritesFilter(): void {
   this.movies.forEach((movie) => {
     if(this.favorites.includes(movie._id)) {
@@ -72,8 +80,12 @@ export class FavoritesComponent implements OnInit {
    })
  }
  
- //movie will be reomved from favorites and the page upon deletion.
- //Only Movies already favorited displayed, so no need to have the add movie part
+
+ /**
+  * Function that will delete a movie if it is in a users favorites
+  * @param {string} title the movie title provided in favorites.components.html
+  * @param {string} id the movie id provided in favorites.components.html
+  */
   changeFavoriteStatus(title: string, id: string): void {
     //find the index of the movie to be deleted
     let movieIndex: number = 0;
@@ -100,6 +112,12 @@ export class FavoritesComponent implements OnInit {
     
     )
   }
+
+  /**
+   * Function to open a dialog displaying Genre information
+   * @param {Object} Genre the movie genre provided in favorites.components.html
+   * passes data to genre-component.component.ts
+   */
   openGenreDialog(genre: Genre): void {
     this.dialog.open(GenreComponent, {
       width: "500px",
@@ -111,6 +129,11 @@ export class FavoritesComponent implements OnInit {
     });
   }
 
+  /**
+   * Function to open a dialog displaying Director information
+   * @param {Object}  Director the movie genre provided in favorites.components.html
+   * passes data to director-component.component.ts
+   */
   openDirectorDialog(director: Director): void {
     this.dialog.open(DirectorComponent, {
       width: "500px",
@@ -124,6 +147,12 @@ export class FavoritesComponent implements OnInit {
     });
   }
 
+  /**
+   * Function to open a dialog displyaing a movies synopsis
+   * @param {string} title  Takes the movie title provided in favorites.components.html
+   * @param {string}  description Takes the description provided in favorites.components.html
+   * passes data to synopsis-component.component.ts
+   */
   openSynopsisDialog(title: string, description: string): void {
     this.dialog.open(SynopsisComponent, {
       width: "500px",

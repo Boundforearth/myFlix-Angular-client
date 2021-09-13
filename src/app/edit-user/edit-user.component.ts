@@ -10,7 +10,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class EditUserComponent implements OnInit {
 
-  //Input is double bound to the inputs in the edit-user HTML page
+  /**
+   *  Inputs double bound to edit-user.component.html
+   */
   @Input() userData = { Username: "", Password: "", Email: "", Birthday: ""}
 
   constructor(
@@ -22,6 +24,9 @@ export class EditUserComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Edits the user information in the database
+   */
   editUser(): void {
     //updates the user information in the database
     this.fetchDataApi.editUser(this.userData).subscribe(() => {

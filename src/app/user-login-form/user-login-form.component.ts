@@ -14,7 +14,9 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 export class UserLoginFormComponent implements OnInit {
 
 
-  //Inputs are double bound to the inputs on the user-login html file
+  /**
+   * Inputs are double bound to the inputs on the user-login html file
+   */
   @Input() userData = { Username: "", Password: ""}
 
   constructor(
@@ -27,6 +29,9 @@ export class UserLoginFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Fenction used to log the user in
+   */
   userLogin(): void {
     //take the input login data and make a request
     this.fetchDataApi.userLogin(this.userData).subscribe((results) => {

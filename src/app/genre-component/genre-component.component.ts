@@ -10,8 +10,10 @@ import { MatDialogRef } from "@angular/material/dialog";
 export class GenreComponent implements OnInit {
 
   constructor(
-    //data from openGenreDialog() in movie-card.component.ts.
-    //MAT_DIALOG_DATA lets the data flow from that file to here for use
+    /**
+     * data from openGenreDialog() in movie-card.component.ts.
+     *MAT_DIALOG_DATA lets the data flow from that file to here for use
+     */
     public dialogRef: MatDialogRef<GenreComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
@@ -19,7 +21,9 @@ export class GenreComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  //close dialog on button click
+  /**
+   * Function to close the dialog
+   */
   closeDialog(): void {
     this.dialogRef.close();
   }
