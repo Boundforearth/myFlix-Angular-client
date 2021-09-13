@@ -1,6 +1,15 @@
 # MyFlixAngularClient
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.4.
+This is a movie app that allows users to register, sign-in, view information about movies, create a favorites list, edit their account, and delete their account.
+This uses the movie API backend that I created in a previous project
+
+## Dependencies
+
+- Angular
+- RxJS
+- Angular Material
+- TypeScript
 
 ## Development server
 
