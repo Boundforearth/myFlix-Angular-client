@@ -27,15 +27,12 @@ export class UserProfileComponent implements OnInit {
      * Gets the user from local storage then runf the get request to get necessary user information
      */
     this.fetchDataApi.getUser(localStorage.getItem("user")).subscribe((results) => {
-      console.log(results);
       // cut off the unneeded part of the birthday
+      this.user.name = results.Username
+      this.user.email = results.Email
       const birthday = results.Birthday.slice(0, 10);
+      this.user.birth = birthday
       //assign the user variable
-      this.user = {
-        name: results.Username,
-        email: results.Email,
-        birth: birthday,
-      }
     })
   }
 
@@ -47,7 +44,7 @@ export class UserProfileComponent implements OnInit {
       width: "500px"
     });
   }
- 
+
   /**
    * Opens dialog used to delete a user account
    */

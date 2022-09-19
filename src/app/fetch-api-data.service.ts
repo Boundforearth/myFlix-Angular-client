@@ -33,13 +33,13 @@ interface loginDetails {
 export class FetchDataApiService {
   //Inject the HttpClient module to the constructo params
   // This will provide HttpClient to the entire class, making it available via this.http
-  constructor(private http: HttpClient) {   
+  constructor(private http: HttpClient) {
   }
 
 
-  /** 
-   * Function to register a user 
-   * @param {Object} userDetails  Uses a User Details object, which is full of strings 
+  /**
+   * Function to register a user
+   * @param {Object} userDetails  Uses a User Details object, which is full of strings
    * returns an error message or the user
    */
   public userRegistration(userDetails: userDetails): Observable<any> {
@@ -50,12 +50,12 @@ export class FetchDataApiService {
   }
 
   /**
-   * 
-   * @param {Object} loginDetails containing Username and Password 
+   *
+   * @param {Object} loginDetails containing Username and Password
    * @returns Returns the user and a token
    */
   userLogin(loginDetails: loginDetails): Observable<any> {
-    const token = localStorage.getItem("token"); 
+    const token = localStorage.getItem("token");
     return this.http.post(apiUrl + "login", loginDetails).pipe(
       catchError(this.handleError)
     )
@@ -69,7 +69,7 @@ export class FetchDataApiService {
  * Each object has _id, Title, Description, Genre, Director, ImagePath, and Featured keys
  */
   getAllMovies(): Observable<any> {
-    const token = localStorage.getItem('token'); 
+    const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'movies', {headers: new HttpHeaders(
       {
         Authorization: `Bearer ${token}`,
@@ -88,7 +88,7 @@ export class FetchDataApiService {
  * displays error message on failure
  */
   getMovie(): Observable<any> {
-    const token = localStorage.getItem("token"); 
+    const token = localStorage.getItem("token");
     return this.http.get(apiUrl + `movie/:movie`, {headers: new HttpHeaders({
       Authorization: `Bearer ${token}`
     })}).pipe(
@@ -103,7 +103,7 @@ export class FetchDataApiService {
    * @returns {Object} returns a Genre object with  Name and Description keys
    */
   getGenre(): Observable<any> {
-    const token = localStorage.getItem('token'); 
+    const token = localStorage.getItem('token');
     return this.http.get(apiUrl + "genres/:genre", {headers: new HttpHeaders({
       Authorization: `Bearer ${token}`
     })}).pipe(
@@ -129,7 +129,7 @@ export class FetchDataApiService {
 
   /**
    * Gets a user from the database
-   * @param {string} user takes the provided username 
+   * @param {string} user takes the provided username
    * @returns {Object} Returns an object with Username, Email, _id, Birthday, and Favorites keys
    */
   getUser(user: string | null): Observable<any> {
@@ -205,7 +205,7 @@ export class FetchDataApiService {
 
   /**
    * Function to delete a movie.  User parameter is taken from local storage
-   * @param {string} movieId 
+   * @param {string} movieId
    * @returns {statusMessage} Returns a message about success or failure status
    */
   deleteFavorite(movieId: string): Observable<any> {
@@ -223,7 +223,7 @@ export class FetchDataApiService {
 
   /**
    * Function that will handle any errors that pop up
-   * @param error 
+   * @param error
    * @returns {statusMessage} returns message about the error
    */
   private handleError(error: HttpErrorResponse): any {
@@ -232,7 +232,7 @@ export class FetchDataApiService {
       console.error("Some error occurred:", error.error.message);
     } else {
       console.error(
-        `Error status code ${error.status}` + 
+        `Error status code ${error.status}` +
         `Error body is: ${error.error}`
       );
     }
@@ -243,7 +243,6 @@ export class FetchDataApiService {
 
 // Non-typed response extraction
   private extractResponseData(res: Response | Object): any {
-    console.log(res)
     const body = res;
     return body || { };
   }
